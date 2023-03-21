@@ -5,6 +5,8 @@
  */
 package EjerciciosExtra;
 
+import java.util.Scanner;
+
 /**
  *
  * @author SFC
@@ -17,9 +19,47 @@ la ubicación de las palabras, rellene los espacios no utilizados con un número
 Finalmente imprima por pantalla la sopa de letras creada.
 Nota: Para resolver el ejercicio deberá investigar cómo se utilizan las siguientes funciones de Java 
 substring(), Length() y Math.random().
-*/
+ */
 public class Ejercicio6 {
-    public static void main(String[] args){
-        
+
+    public static void main(String[] args) {
+        String[][] matriz = new String[20][20];
+        Scanner read = new Scanner(System.in);
+        String aux;
+        int filas = 0;
+
+        for (int i = 0; i < 5; i++) {
+            System.out.println("Ingrese una palabra de entre 3 y 5 caracteres");
+            aux = read.nextLine();
+            if ((aux.length() >= 3) && (aux.length() <= 5)) {
+                for (int j = 0; j < aux.length(); j++) {
+                    if (j == 0) {
+                        filas = (int) (Math.random() * 9);
+                    }
+                    if (matriz[filas][j] == null) {
+                        matriz[filas][j] = aux.substring(j, j + 1);
+                    } else { j--;
+                    }
+                }
+            } else {
+                System.out.println("Su número no tiene entre 3 y 5 caracteres");
+                i--;
+            }
+        }
+
+        for (int i = 0; i < 20; i++) {
+            for (int j = 0; j < 20; j++) {
+                if (matriz[i][j] == null) {
+                    matriz[i][j] = String.valueOf((int) (Math.random() * 10));
+                }
+            }
+        }
+
+        for (int i = 0; i < 20; i++) {
+            for (int j = 0; j < 20; j++) {
+                System.out.print("[" + matriz[i][j] + "]");
+            }
+            System.out.println(" ");
+        }
     }
 }
